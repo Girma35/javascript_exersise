@@ -1,5 +1,5 @@
 var days = ["Monday", "Tuesday", "Wednesday", "Friday", "Saturday", "Sunday"];
-var current_day = "Tuesday";
+var current_day = "monday";
 var current_hour = 10;
 var current_minute = 30;
 var current_second = 45;
