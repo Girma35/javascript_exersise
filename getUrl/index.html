@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Document</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    </head>
+    <body>
+        <p>To get the url of these web page click the below button</p><br>
+        <button onclick="getUrl()">GetUrl</button>
+        <p id="Url"></p>
+    
+    </body>
+    <script>
+        
+        function getUrl(){
+        var WebsiteUrl=document.URL;
+        document.getElementById("Url").innerHTML = "The url of these web page is : " +WebsiteUrl ;
+        }
+    </script>
+</html>
