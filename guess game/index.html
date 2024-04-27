@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Guess Game</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    <h1 class="h1">Number Guessing Game</h1>
+    <p class="p">We have selected a random number between 1 and 100. <br>See if you can guess it in 10 turns or fewer.<br> We'll tell you if your guess was too high or too low.</p>
+    <form>
+      Enter a guess:
+      <input type="number" class="guessField">
+      <input type="button" value="Submit Guess" class="guessSubmit">
+    </form>
+    <div class="resultParas">
+      <p class="guesses">Previous guesses:</p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi">Last guess was too</p>
+    </div>
+  </div>   
+  <script>
+    // Paste the JavaScript code here
+    // The code you provided
+    let randomNumber = Math.floor(Math.random() * 100) + 1;
+
+    const guesses = document.querySelector(".guesses");
+    const lastResult = document.querySelector(".lastResult");
+    const lowOrHi = document.querySelector(".lowOrHi");
+
+    const guessSubmit = document.querySelector(".guessSubmit");
+    const guessField = document.querySelector(".guessField");
+
+    let guessCount = 1;
+    let resetButton;
+
+    function checkGuess() {
+      var userGuess = Number(guessField.value);
+      if (userGuess === randomNumber) {
+        lastResult.textContent = "Congratulations! You got it right!";
+        lastResult.style.backgroundColor = "green";
+        lowOrHi.textContent = "";
+        setGameOver();
+      } else if (guessCount === 10) {
+        lastResult.textContent = "GAME OVER!";
+        lowOrHi.textContent = "";
+        setGameOver();
+      } else {
+        lastResult.textContent = "Wrong guess!";
+        lastResult.style.backgroundColor = "red";
+        if (userGuess < randomNumber) {
+          lowOrHi.textContent = "Last guess was too low!";
+        } else {
+          lowOrHi.textContent = "Last guess was too high!";
+        }
+      }
+      guessCount++;
+      guessField.value = "";
+      guessField.focus();
+    }
+
+    guessSubmit.addEventListener("click", checkGuess);
+
+    function setGameOver() {
+      guessSubmit.disabled = true;
+      guessField.disabled = true;
+      resetButton = document.createElement("button");
+      resetButton.textContent = "Start New Game";
+      document.body.appendChild(resetButton);
+      resetButton.addEventListener("click", resetGame);
+    }
+
+    function resetGame() {
+      guessCount = 1;
+      guesses.textContent = "";
+      lastResult.textContent = "";
+      lowOrHi.textContent = "";
+      resetButton.parentNode.removeChild(resetButton);
+      guessField.disabled = false;
+      guessSubmit.disabled = false;
+      guessField.value = "";
+      guessField.focus();
+      lastResult.style.backgroundColor = "white";
+      randomNumber = Math.floor(Math.random() * 100) + 1;
+    }
+  </script>
+</body>
+</html>
